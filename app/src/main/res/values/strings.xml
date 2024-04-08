@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TajLife</string>
+    <string name="search_hint">Посик\n</string>
+    <string name="search_hinti">Поиск</string>
+</resources>
