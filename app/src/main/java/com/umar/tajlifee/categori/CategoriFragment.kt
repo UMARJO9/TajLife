@@ -22,7 +22,7 @@ class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener
     private lateinit var db: AppDatabase
     private lateinit var categoryDao: CategoryDao
     private val adapter = ChatsAdapter(this)
-    private var isDataLoaded = false // флаг, чтобы убедиться, что данные были загружены только один раз
+    private var isDataLoaded = false //
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,16 +33,16 @@ class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener
         val searchEditText = view.findViewById<EditText>(R.id.TextViewsearch)
         searchEditText.setBackgroundResource(0)
 
-        // Инициализация базы данных и DAO
+
         db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app-database").build()
         categoryDao = db.categoryDao()
 
-        // Добавление данных в базу данных и обновление RecyclerView
+
         lifecycleScope.launch {
             addDataToDatabase()
-            if (!isDataLoaded) { // Проверяем, загружали ли мы данные ранее
+            if (!isDataLoaded) {
                 removeDuplicateData()
-                isDataLoaded = true // Устанавливаем флаг в true, чтобы не вызывать метод снова
+                isDataLoaded = true //
             }
 
             val data = withContext(Dispatchers.IO) {
@@ -69,11 +69,11 @@ class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener
     }
 
     private suspend fun addDataToDatabase() {
-        // Проверяем, есть ли уже данные в таблице
+
         val existingDataCount = categoryDao.getCategoriesCount()
 
         if (existingDataCount == 0) {
-            // Если таблица пуста, добавляем данные
+
             val data = listOf(
                 CategoryEntity(1, "История", R.drawable.history),
                 CategoryEntity(2, "Города", R.drawable.town),
@@ -90,16 +90,16 @@ class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener
         }
     }
     private suspend fun removeDuplicateData() {
-        // Получаем список всех категорий
+
         val allCategories = categoryDao.getAllCategories()
 
-        // Удаляем дубликаты из списка allCategories по полю id
+
         val uniqueCategories = allCategories.distinctBy { it.id }
 
-        // Удаляем все категории из базы данных
+
         categoryDao.deleteAllCategories()
 
-        // Добавляем уникальные категории обратно в базу данных
+
         uniqueCategories.forEach { uniqueCategory ->
             categoryDao.insertCategory(uniqueCategory)
         }
