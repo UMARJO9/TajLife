@@ -9,15 +9,15 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.model.CategoriModelt
+import com.umar.tajlifee.categori.model.CategoryEntity
 
 
 class ChatsAdapter(val listener: Listener) : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
 
-    private val items = ArrayList<CategoriModelt>()
+    private val items = ArrayList<CategoryEntity>()
 
     @SuppressLint("notifyDataSetChanged")
-    fun updateItems(items: List<CategoriModelt>) {
+    fun updateItems(items: List<CategoryEntity>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
@@ -29,12 +29,12 @@ class ChatsAdapter(val listener: Listener) : RecyclerView.Adapter<ChatsAdapter.V
         private val titleTextView = itemView.findViewById<TextView>(R.id.titleTvChat)
         private val avatarImageView = itemView.findViewById<ImageView>(R.id.imageViewChat)
 
-        fun bind(item: CategoriModelt, listener: Listener) {
-            titleTextView.text = item.chatNames
+        fun bind(item: CategoryEntity, listener: Listener) {
+            titleTextView.text = item.name
             avatarImageView.setImageDrawable(
                 ContextCompat.getDrawable(
                     itemView.context,
-                    item.chatAvatar
+                    item.imageResId
                 )
             )
             itemView.setOnLongClickListener {
@@ -56,7 +56,7 @@ class ChatsAdapter(val listener: Listener) : RecyclerView.Adapter<ChatsAdapter.V
     }
 
     interface Listener {
-        fun onClick(item: CategoriModelt)
+        fun onClick(item: CategoryEntity)
     }
 
 

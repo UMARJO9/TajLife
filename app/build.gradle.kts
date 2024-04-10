@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    
+    kotlin("kapt")
+
 }
 
 android {
@@ -39,30 +40,15 @@ android {
 }
 
 dependencies {
-    val room_version = "2.6.1"
-
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-
-
-
-
-    implementation("androidx.room:room-ktx:$room_version")
-
-
-    implementation("androidx.room:room-rxjava2:$room_version")
-
-
-    implementation("androidx.room:room-rxjava3:$room_version")
-
-
-    implementation("androidx.room:room-guava:$room_version")
-
-    testImplementation("androidx.room:room-testing:$room_version")
-
-
-    implementation("androidx.room:room-paging:$room_version")
-
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.rxjava2)
+    implementation(libs.androidx.room.rxjava3)
+    implementation(libs.androidx.room.guava)
+    testImplementation(libs.androidx.room.testing)
+    implementation(libs.androidx.room.paging)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
