@@ -11,18 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.umar.tajlifee.R
 import com.umar.tajlifee.categori.adapter.ChatsAdapter
-import com.umar.tajlifee.categori.model.CategoryEntity
+import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.umar.tajlifee.AppDatabase
-import com.umar.tajlifee.CategoryDao
+import com.umar.tajlifee.categori.dbCategori.AppDatabase
+import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
 
 class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
     private lateinit var db: AppDatabase
-    private lateinit var categoryDao: CategoryDao
+    private lateinit var categoryDao: CategoriDao
     private val adapter = ChatsAdapter(this)
-    private var isDataLoaded = false //
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,11 +40,6 @@ class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener
 
         lifecycleScope.launch {
             addDataToDatabase()
-            if (!isDataLoaded) {
-                removeDuplicateData()
-                isDataLoaded = true //
-            }
-
             val data = withContext(Dispatchers.IO) {
                 categoryDao.getAllCategories()
             }
@@ -75,13 +70,13 @@ class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener
         if (existingDataCount == 0) {
 
             val data = listOf(
-                CategoryEntity(1, "История", R.drawable.history),
-                CategoryEntity(2, "Города", R.drawable.town),
-                CategoryEntity(3, "Туристически места", R.drawable.turist)
+                EntityCategoriModel(1, "История", R.drawable.history),
+                EntityCategoriModel(2, "Города", R.drawable.town),
+                EntityCategoriModel(3, "Туристически места", R.drawable.turist)
             )
 
             data.forEach { categoryModel ->
-                val categoryEntity = CategoryEntity(
+                val categoryEntity = EntityCategoriModel(
                     name = categoryModel.name,
                     imageResId = categoryModel.imageResId
                 )
@@ -89,24 +84,9 @@ class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener
             }
         }
     }
-    private suspend fun removeDuplicateData() {
-
-        val allCategories = categoryDao.getAllCategories()
 
 
-        val uniqueCategories = allCategories.distinctBy { it.id }
+    override fun onClick(item: EntityCategoriModel) {
 
-
-        categoryDao.deleteAllCategories()
-
-
-        uniqueCategories.forEach { uniqueCategory ->
-            categoryDao.insertCategory(uniqueCategory)
-        }
-    }
-
-
-    override fun onClick(item: CategoryEntity) {
-        // Обработка клика по элементу списка
     }
 }

@@ -9,15 +9,15 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.model.CategoryEntity
+import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
 
 
 class ChatsAdapter(val listener: Listener) : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
 
-    private val items = ArrayList<CategoryEntity>()
+    private val items = ArrayList<EntityCategoriModel>()
 
     @SuppressLint("notifyDataSetChanged")
-    fun updateItems(items: List<CategoryEntity>) {
+    fun updateItems(items: List<EntityCategoriModel>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
@@ -29,7 +29,7 @@ class ChatsAdapter(val listener: Listener) : RecyclerView.Adapter<ChatsAdapter.V
         private val titleTextView = itemView.findViewById<TextView>(R.id.titleTvChat)
         private val avatarImageView = itemView.findViewById<ImageView>(R.id.imageViewChat)
 
-        fun bind(item: CategoryEntity, listener: Listener) {
+        fun bind(item: EntityCategoriModel, listener: Listener) {
             titleTextView.text = item.name
             avatarImageView.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -56,7 +56,7 @@ class ChatsAdapter(val listener: Listener) : RecyclerView.Adapter<ChatsAdapter.V
     }
 
     interface Listener {
-        fun onClick(item: CategoryEntity)
+        fun onClick(item: EntityCategoriModel)
     }
 
 
