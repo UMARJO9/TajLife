@@ -1,11 +1,11 @@
-package com.umar.tajlifee.categori.dbCategori.entity
+package com.umar.tajlifee.categoridetal.dbCategoriDetal.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.ColumnInfo
 
-@Entity(tableName = "categori")
-data class EntityCategoriModel(
+@Entity(tableName = "categoridetal")
+data class Entity_Categori_Detal(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Long = 0,

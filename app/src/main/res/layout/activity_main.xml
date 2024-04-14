@@ -23,7 +23,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/baneer" />
+                android:src="@drawable/baneer">
+
+            </ImageView>
 
         </androidx.cardview.widget.CardView>
 
@@ -32,7 +34,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/chats_fragment_container"
-        android:name="com.umar.tajlifee.categori.ChatFragment"
+        android:name="com.umar.tajlifee.categori.CategoryFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

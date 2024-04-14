@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#F5FFFA</color>
+    <color name="background">#F5FFFA</color>0e1824
+    <color name="background_night">#0e1824</color>
     <color name="search_backgound">#F4F6FD</color>
 </resources>

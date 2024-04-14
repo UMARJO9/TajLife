@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 import com.umar.tajlifee.categori.dbCategori.AppDatabase
 import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
 
-class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
+class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
     private lateinit var db: AppDatabase
     private lateinit var categoryDao: CategoriDao
     private val adapter = ChatsAdapter(this)
@@ -70,9 +70,9 @@ class ChatFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener
         if (existingDataCount == 0) {
 
             val data = listOf(
-                EntityCategoriModel(1, "История", R.drawable.history),
-                EntityCategoriModel(2, "Города", R.drawable.town),
-                EntityCategoriModel(3, "Туристически места", R.drawable.turist)
+                EntityCategoriModel(1,"История", R.drawable.history),
+                EntityCategoriModel(2,"Города", R.drawable.town),
+                EntityCategoriModel(3,"Туристически места", R.drawable.turist)
             )
 
             data.forEach { categoryModel ->
