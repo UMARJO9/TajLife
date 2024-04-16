@@ -1,5 +1,6 @@
 package com.umar.tajlifee.categori
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.umar.tajlifee.CategoryDetailActivity
 import com.umar.tajlifee.R
 import com.umar.tajlifee.categori.adapter.ChatsAdapter
 import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.umar.tajlifee.categori.dbCategori.AppDatabase
 import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
+import com.umar.tajlifee.categori.dbCategori.migration_1_2
 
 class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
     private lateinit var db: AppDatabase
@@ -34,7 +37,9 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
         searchEditText.setBackgroundResource(0)
 
 
-        db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app-database").build()
+        db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app-database")
+            .addMigrations(migration_1_2)
+            .build()
         categoryDao = db.categoryDao()
 
 
@@ -70,9 +75,9 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
         if (existingDataCount == 0) {
 
             val data = listOf(
-                EntityCategoriModel(1,"История", R.drawable.history),
-                EntityCategoriModel(2,"Города", R.drawable.town),
-                EntityCategoriModel(3,"Туристически места", R.drawable.turist)
+                EntityCategoriModel(1, "История", R.drawable.history),
+                EntityCategoriModel(2, "Города", R.drawable.town),
+                EntityCategoriModel(3, "Туристически места", R.drawable.turist)
             )
 
             data.forEach { categoryModel ->
@@ -87,6 +92,10 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
 
 
     override fun onClick(item: EntityCategoriModel) {
+        if (item.name == "Города") {
+            val intent = Intent(requireContext(), CategoryDetailActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }

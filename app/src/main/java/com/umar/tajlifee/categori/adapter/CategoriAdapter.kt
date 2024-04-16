@@ -12,7 +12,7 @@ import com.umar.tajlifee.R
 import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
 
 
-class ChatsAdapter(val listener: Listener) : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
+class ChatsAdapter(private val listener: Listener) : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
 
     private val items = ArrayList<EntityCategoriModel>()
 
