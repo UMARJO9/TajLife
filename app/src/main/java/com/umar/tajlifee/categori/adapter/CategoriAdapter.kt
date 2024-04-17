@@ -29,7 +29,7 @@ class ChatsAdapter(private val listener: Listener) :
         fun bind(item: EntityCategoriModel, listener: Listener, context: Context) {
             titleTextView.text = item.title
 
-            val imageUrl = "file:///android_asset/${item.image_url}"
+            val imageUrl = "file:///android_asset/${item.image_url}.png"
 
             Glide.with(context)
                 .load(imageUrl)
