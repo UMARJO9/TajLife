@@ -12,6 +12,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/background_card"
         android:layout_margin="5dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp">
@@ -37,10 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:layout_weight="8"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                tools:text="Title" />
+                tools:text="Title"
+                style="@style/CategoryTextView"/>
 
             <ImageView
                 android:layout_width="25dp"

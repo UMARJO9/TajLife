@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CategoryTextView" >
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/platypi_variablefont_wght</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/category_text_color</item>
+    </style>
+</resources>
