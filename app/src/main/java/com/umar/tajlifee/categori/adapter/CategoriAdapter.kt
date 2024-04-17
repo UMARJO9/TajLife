@@ -1,5 +1,6 @@
 package com.umar.tajlifee.categori.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ class ChatsAdapter(private val listener: Listener) :
 
     private val items = ArrayList<EntityCategoriModel>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateItems(items: List<EntityCategoriModel>) {
         this.items.clear()
         this.items.addAll(items)
