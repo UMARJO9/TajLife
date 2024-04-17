@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#F5FFFA</color>0e1824
     <color name="background_night">#0e1824</color>
-    <color name="search_backgound">#F4F6FD</color>
+    <color name="search_background">#F4F6FD</color>
+    <color name="background_card">#FFFFFF</color>
+    <color name="category_text_color">#101010</color>
 </resources>

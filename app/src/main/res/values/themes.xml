@@ -6,6 +6,5 @@
         <item name="background">@color/background</item>
 
     </style>
-
     <style name="Theme.TajLife" parent="Base.Theme.TajLife" />
 </resources>
