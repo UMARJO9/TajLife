@@ -1,6 +1,6 @@
 package com.umar.tajlifee.categori
 
-import android.content.Intent
+import com.umar.tajlifee.categori.adapter.ChatsAdapter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,22 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.umar.tajlifee.CategoryDetailActivity
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.adapter.ChatsAdapter
+import com.umar.tajlifee.categori.dbCategori.AppDatabase
+import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
 import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.umar.tajlifee.categori.dbCategori.AppDatabase
-import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
-import com.umar.tajlifee.categori.dbCategori.migration_1_2
 
 class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
     private lateinit var db: AppDatabase
     private lateinit var categoryDao: CategoriDao
     private val adapter = ChatsAdapter(this)
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,19 +32,13 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
         val searchEditText = view.findViewById<EditText>(R.id.TextViewsearch)
         searchEditText.setBackgroundResource(0)
 
-
-        db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app-database")
-            .addMigrations(migration_1_2)
+        db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "category.db")
+            .createFromAsset("db/category.db")
             .build()
         categoryDao = db.categoryDao()
 
-
         lifecycleScope.launch {
             addDataToDatabase()
-            val data = withContext(Dispatchers.IO) {
-                categoryDao.getAllCategories()
-            }
-            adapter.updateItems(data)
         }
 
         searchEditText.addTextChangedListener(object : TextWatcher {
@@ -69,33 +59,15 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
     }
 
     private suspend fun addDataToDatabase() {
-
-        val existingDataCount = categoryDao.getCategoriesCount()
-
-        if (existingDataCount == 0) {
-
-            val data = listOf(
-                EntityCategoriModel(1, "История", R.drawable.history),
-                EntityCategoriModel(2, "Города", R.drawable.town),
-                EntityCategoriModel(3, "Туристически места", R.drawable.turist)
-            )
-
-            data.forEach { categoryModel ->
-                val categoryEntity = EntityCategoriModel(
-                    name = categoryModel.name,
-                    imageResId = categoryModel.imageResId
-                )
-                categoryDao.insertCategory(categoryEntity)
-            }
+        val dataFromDatabase = withContext(Dispatchers.IO) {
+            categoryDao.getCategoriesWithIsStart(0)
         }
+
+
+        adapter.updateItems(dataFromDatabase)
     }
 
-
     override fun onClick(item: EntityCategoriModel) {
-        if (item.name == "Города") {
-            val intent = Intent(requireContext(), CategoryDetailActivity::class.java)
-            startActivity(intent)
-        }
 
     }
 }
