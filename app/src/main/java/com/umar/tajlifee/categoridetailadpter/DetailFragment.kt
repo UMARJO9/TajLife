@@ -16,10 +16,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailFragment() : Fragment(R.layout.fragment_categori_detal), CategoriDetailAdapter.Listener {
+class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetailAdapter.Listener {
     private lateinit var categoryDao: CategoriDao
     private val adapter = CategoriDetailAdapter(this)
-    private val ARG_CATEGORY_ID = "categoryId"
+
+    companion object {
+        var ARG_CATEGORY_ID = "categoryId"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -32,10 +36,6 @@ class DetailFragment() : Fragment(R.layout.fragment_categori_detal), CategoriDet
         val db = DatabaseManager.getDatabase(requireContext())
         categoryDao = db.categoryDao()
 
-        lifecycleScope.launch {
-            addDataToDatabase()
-        }
-
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -44,7 +44,7 @@ class DetailFragment() : Fragment(R.layout.fragment_categori_detal), CategoriDet
                 lifecycleScope.launch {
                     val filteredData = withContext(Dispatchers.IO) {
                         if (searchText.isNullOrEmpty()) {
-                            val categoryId = arguments?.getInt(ARG_CATEGORY_ID, -1) ?: -1
+                            val categoryId = requireActivity().intent.getIntExtra("categoryId", 1)
                             categoryDao.getCategoriesByParentId(categoryId)
                         } else {
                             categoryDao.searchCategories(searchText)
@@ -58,19 +58,22 @@ class DetailFragment() : Fragment(R.layout.fragment_categori_detal), CategoriDet
         })
     }
 
-
-    private suspend fun addDataToDatabase() {
-        val categoryId = arguments?.getInt(ARG_CATEGORY_ID, -1) ?: -1
-        if (categoryId != -1) {
-            val dataFromDatabase = withContext(Dispatchers.IO) {
-                categoryDao.getCategoriesByParentId(categoryId)
-            }
-            adapter.updateItems(dataFromDatabase)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val categoryId = requireActivity().intent.getIntExtra("categoryId", 1)
+        lifecycleScope.launch {
+            addDataToDatabase(categoryId)
         }
+    }
 
+    private suspend fun addDataToDatabase(categoryId:Int) {
+        val dataFromDatabase = withContext(Dispatchers.IO) {
+            categoryDao.getCategoriesByParentId(categoryId)
+        }
+        adapter.updateItems(dataFromDatabase)
     }
 
     override fun onClick(item: EntityCategoriModel) {
-
     }
 }
+
