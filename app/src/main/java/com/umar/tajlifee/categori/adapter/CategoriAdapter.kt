@@ -24,6 +24,10 @@ class ChatsAdapter(private val listener: Listener) :
         notifyDataSetChanged()
     }
 
+    interface Listener {
+        fun onItemClick(item: EntityCategoriModel)
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.titleTvChat)
         private val avatarImageView: ImageView = itemView.findViewById(R.id.imageViewChat)
@@ -40,7 +44,7 @@ class ChatsAdapter(private val listener: Listener) :
                 .into(avatarImageView)
 
 
-            itemView.setOnClickListener { listener.onClick(item) }
+            itemView.setOnClickListener { listener.onItemClick(item) }
         }
     }
 
@@ -54,9 +58,5 @@ class ChatsAdapter(private val listener: Listener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position], listener, holder.itemView.context)
-    }
-
-    interface Listener {
-        fun onClick(item: EntityCategoriModel)
     }
 }

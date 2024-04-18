@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.dbCategori.AppDatabase
 import com.umar.tajlifee.categori.dbCategori.DatabaseManager
 import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
 import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
@@ -17,11 +16,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetailAdapter.Listener {
-    private lateinit var db: AppDatabase
+class DetailFragment() : Fragment(R.layout.fragment_categori_detal), CategoriDetailAdapter.Listener {
     private lateinit var categoryDao: CategoriDao
     private val adapter = CategoriDetailAdapter(this)
-
+    private val ARG_CATEGORY_ID = "categoryId"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,7 +44,8 @@ class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetai
                 lifecycleScope.launch {
                     val filteredData = withContext(Dispatchers.IO) {
                         if (searchText.isNullOrEmpty()) {
-                            categoryDao.getCategoriesWithIsStart(1)
+                            val categoryId = arguments?.getInt(ARG_CATEGORY_ID, -1) ?: -1
+                            categoryDao.getCategoriesByParentId(categoryId)
                         } else {
                             categoryDao.searchCategories(searchText)
                         }
@@ -59,13 +58,16 @@ class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetai
         })
     }
 
+
     private suspend fun addDataToDatabase() {
-        val dataFromDatabase = withContext(Dispatchers.IO) {
-            categoryDao.getCategoriesWithIsStart(1)
+        val categoryId = arguments?.getInt(ARG_CATEGORY_ID, -1) ?: -1
+        if (categoryId != -1) {
+            val dataFromDatabase = withContext(Dispatchers.IO) {
+                categoryDao.getCategoriesByParentId(categoryId)
+            }
+            adapter.updateItems(dataFromDatabase)
         }
 
-
-        adapter.updateItems(dataFromDatabase)
     }
 
     override fun onClick(item: EntityCategoriModel) {

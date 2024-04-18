@@ -57,6 +57,8 @@ class CategoriDetailAdapter(private val listener: Listener) :
     }
 
     interface Listener {
+
+
         fun onClick(item: EntityCategoriModel)
     }
 }

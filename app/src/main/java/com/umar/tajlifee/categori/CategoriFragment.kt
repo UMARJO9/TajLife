@@ -1,5 +1,6 @@
 package com.umar.tajlifee.categori
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,18 +9,19 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.umar.tajlifee.Categori_Detal_Activity
 import com.umar.tajlifee.R
 import com.umar.tajlifee.categori.adapter.ChatsAdapter
 import com.umar.tajlifee.categori.dbCategori.AppDatabase
 import com.umar.tajlifee.categori.dbCategori.DatabaseManager
 import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
 import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
+import com.umar.tajlifee.categoridetailadpter.DetailFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
-    private lateinit var db: AppDatabase
     private lateinit var categoryDao: CategoriDao
     private val adapter = ChatsAdapter(this)
 
@@ -69,7 +71,10 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
         adapter.updateItems(dataFromDatabase)
     }
 
-    override fun onClick(item: EntityCategoriModel) {
+    override fun onItemClick(item: EntityCategoriModel) {
+        val intent = Intent(context, Categori_Detal_Activity::class.java)
+        intent.putExtra("categoryId", item.id)
+        startActivity(intent)
 
     }
 }

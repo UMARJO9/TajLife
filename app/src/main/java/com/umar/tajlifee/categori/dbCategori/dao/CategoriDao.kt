@@ -18,6 +18,8 @@ interface CategoriDao {
 
     @Query("SELECT * FROM category WHERE is_start = :isStart")
     suspend fun getCategoriesWithIsStart(isStart: Int): List<EntityCategoriModel>
+    @Query("SELECT * FROM category WHERE parent_id = :parentId")
+    suspend fun getCategoriesByParentId(parentId: Int): List<EntityCategoriModel>
 
     @Query("SELECT COUNT(*) FROM category")
     suspend fun getCategoriesCount(): Int
