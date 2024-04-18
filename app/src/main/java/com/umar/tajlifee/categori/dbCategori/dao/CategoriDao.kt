@@ -14,7 +14,6 @@ interface CategoriDao {
     suspend fun searchCategories(searchText: String): List<EntityCategoriModel>
 
     @Query("SELECT * FROM category")
-
     suspend fun getAllCategories(): List<EntityCategoriModel>
 
     @Query("SELECT * FROM category WHERE is_start = :isStart")

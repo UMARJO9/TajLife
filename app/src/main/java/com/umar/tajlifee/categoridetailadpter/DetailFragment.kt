@@ -1,4 +1,4 @@
-package com.umar.tajlifee.categori
+package com.umar.tajlifee.categoridetailadpter
 
 import android.os.Bundle
 import android.text.Editable
@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.adapter.ChatsAdapter
 import com.umar.tajlifee.categori.dbCategori.AppDatabase
 import com.umar.tajlifee.categori.dbCategori.DatabaseManager
 import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
@@ -18,18 +17,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
+class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetailAdapter.Listener {
     private lateinit var db: AppDatabase
     private lateinit var categoryDao: CategoriDao
-    private val adapter = ChatsAdapter(this)
+    private val adapter = CategoriDetailAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChat)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewdetal)
         recyclerView.adapter = adapter
 
-        val searchEditText = view.findViewById<EditText>(R.id.TextViewsearch)
+        val searchEditText = view.findViewById<EditText>(R.id.TextViewsearchdetal)
         searchEditText.setBackgroundResource(0)
 
         val db = DatabaseManager.getDatabase(requireContext())
