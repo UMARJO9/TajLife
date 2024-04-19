@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/imageViewDetal"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:contentDescription="avatar"
                 android:scaleType="centerCrop"
                 android:src="@drawable/avatar" />
@@ -36,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_weight="8"
                 android:textColor="@color/black"

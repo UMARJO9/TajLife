@@ -17,3 +17,13 @@ data class EntityCategoriModel(
     @ColumnInfo(name = "image_url")
     val image_url: String
 )
+@Entity(tableName = "information")
+data class EntityInformation(
+    @PrimaryKey val id: Int,
+    @ColumnInfo(name = "images_url")
+    val images_url: String ,
+    @ColumnInfo(name = "information")
+    val information: String,
+    @ColumnInfo(name = "detaili_id")
+    val detaili_id: Int,
+)

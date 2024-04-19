@@ -1,5 +1,4 @@
 package com.umar.tajlifee.categoridetailadpter
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
@@ -39,14 +38,15 @@ class CategoriDetailAdapter(private val listener: Listener) :
                 .error(R.drawable.eror)
                 .into(avatarImageView)
 
-
-            itemView.setOnClickListener { listener.onClick(item) }
+            // Получаем detailId элемента и передаем его в метод onClickDetail интерфейса Listener
+            val detailId = item.detail_id
+            itemView.setOnClickListener { listener.onClickDetail(detailId) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.categori_detal_iteam, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.categori_detal_iteam, parent, false)
         return ViewHolder(view)
     }
 
@@ -57,6 +57,6 @@ class CategoriDetailAdapter(private val listener: Listener) :
     }
 
     interface Listener {
-        fun onClick(item: EntityCategoriModel)
+        fun onClickDetail(detailId: Int)
     }
 }

@@ -1,5 +1,6 @@
 package com.umar.tajlifee.categoridetailadpter
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +9,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.umar.tajlifee.Information_Activity
 import com.umar.tajlifee.R
 import com.umar.tajlifee.categori.dbCategori.DatabaseManager
 import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
@@ -19,10 +21,6 @@ import kotlinx.coroutines.withContext
 class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetailAdapter.Listener {
     private lateinit var categoryDao: CategoriDao
     private val adapter = CategoriDetailAdapter(this)
-
-    companion object {
-        var ARG_CATEGORY_ID = "categoryId"
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,7 +71,15 @@ class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetai
         adapter.updateItems(dataFromDatabase)
     }
 
-    override fun onClick(item: EntityCategoriModel) {
+
+
+
+    override fun onClickDetail(detailId: Int) {
+        val intent = Intent(requireContext(), Information_Activity::class.java)
+        intent.putExtra("detailId", detailId)
+        startActivity(intent)
     }
+
+
 }
 
