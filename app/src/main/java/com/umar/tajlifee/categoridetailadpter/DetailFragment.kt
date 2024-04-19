@@ -1,18 +1,14 @@
-package com.umar.tajlifee.categori
+package com.umar.tajlifee.categoridetailadpter
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.umar.tajlifee.Categori_Detal_Activity
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.adapter.ChatsAdapter
 import com.umar.tajlifee.categori.dbCategori.DatabaseManager
 import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
 import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
@@ -20,25 +16,25 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
+class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetailAdapter.Listener {
     private lateinit var categoryDao: CategoriDao
-    private val adapter = ChatsAdapter(this)
+    private val adapter = CategoriDetailAdapter(this)
+
+    companion object {
+        var ARG_CATEGORY_ID = "categoryId"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChat)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewdetal)
         recyclerView.adapter = adapter
 
-        val searchEditText = view.findViewById<EditText>(R.id.TextViewsearch)
+        val searchEditText = view.findViewById<EditText>(R.id.TextViewsearchdetal)
         searchEditText.setBackgroundResource(0)
 
         val db = DatabaseManager.getDatabase(requireContext())
         categoryDao = db.categoryDao()
-
-        lifecycleScope.launch {
-            addDataToDatabase()
-        }
 
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -48,7 +44,8 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
                 lifecycleScope.launch {
                     val filteredData = withContext(Dispatchers.IO) {
                         if (searchText.isNullOrEmpty()) {
-                            categoryDao.getCategoriesWithIsStart(1)
+                            val categoryId = requireActivity().intent.getIntExtra("categoryId", 1)
+                            categoryDao.getCategoriesByParentId(categoryId)
                         } else {
                             categoryDao.searchCategories(searchText)
                         }
@@ -61,19 +58,22 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
         })
     }
 
-    private suspend fun addDataToDatabase() {
-        val dataFromDatabase = withContext(Dispatchers.IO) {
-            categoryDao.getCategoriesWithIsStart(1)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val categoryId = requireActivity().intent.getIntExtra("categoryId", 1)
+        lifecycleScope.launch {
+            addDataToDatabase(categoryId)
         }
+    }
 
+    private suspend fun addDataToDatabase(categoryId:Int) {
+        val dataFromDatabase = withContext(Dispatchers.IO) {
+            categoryDao.getCategoriesByParentId(categoryId)
+        }
         adapter.updateItems(dataFromDatabase)
     }
 
-
-    override fun onItemClick(item: EntityCategoriModel) {
-        val intent = Intent(context, Categori_Detal_Activity::class.java)
-        intent.putExtra("categoryId", item.id)
-        startActivity(intent)
+    override fun onClick(item: EntityCategoriModel) {
     }
-
 }
+

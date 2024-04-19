@@ -1,4 +1,4 @@
-package com.umar.tajlifee.categori.adapter
+package com.umar.tajlifee.categoridetailadpter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide
 import com.umar.tajlifee.R
 import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
 
-class ChatsAdapter(private val listener: Listener) :
-    RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
+class CategoriDetailAdapter(private val listener: Listener) :
+    RecyclerView.Adapter<CategoriDetailAdapter.ViewHolder>() {
 
     private val items = ArrayList<EntityCategoriModel>()
 
@@ -24,16 +24,12 @@ class ChatsAdapter(private val listener: Listener) :
         notifyDataSetChanged()
     }
 
-    interface Listener {
-        fun onItemClick(item: EntityCategoriModel)
-    }
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleTextView: TextView = itemView.findViewById(R.id.titleTvChat)
-        private val avatarImageView: ImageView = itemView.findViewById(R.id.imageViewChat)
+        private val titleTextViewdetail: TextView = itemView.findViewById(R.id.titleTvDetal)
+        private val avatarImageView: ImageView = itemView.findViewById(R.id.imageViewDetal)
 
         fun bind(item: EntityCategoriModel, listener: Listener, context: Context) {
-            titleTextView.text = item.title
+            titleTextViewdetail.text = item.title
 
             val imageUrl = "file:///android_asset/${item.image_url}"
 
@@ -44,13 +40,13 @@ class ChatsAdapter(private val listener: Listener) :
                 .into(avatarImageView)
 
 
-            itemView.setOnClickListener { listener.onItemClick(item) }
+            itemView.setOnClickListener { listener.onClick(item) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.categori_iteam, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.categori_detal_iteam, parent, false)
         return ViewHolder(view)
     }
 
@@ -58,5 +54,9 @@ class ChatsAdapter(private val listener: Listener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position], listener, holder.itemView.context)
+    }
+
+    interface Listener {
+        fun onClick(item: EntityCategoriModel)
     }
 }

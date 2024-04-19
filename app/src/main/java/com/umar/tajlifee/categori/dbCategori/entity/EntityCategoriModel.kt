@@ -12,8 +12,6 @@ data class EntityCategoriModel(
     val is_Start: Int = 0,
     @ColumnInfo(name = "parent_id")
     val parent_id: Int = 0,
-    @ColumnInfo(name = "type")
-    val type: Int,
     @ColumnInfo(name = "detail_id")
     val detail_id: Int,
     @ColumnInfo(name = "image_url")
