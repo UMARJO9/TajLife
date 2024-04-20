@@ -20,5 +20,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner)
+            //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner_night)
+        }
+
     }
 }
