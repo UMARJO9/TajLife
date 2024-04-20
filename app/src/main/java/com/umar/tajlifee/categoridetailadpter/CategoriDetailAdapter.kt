@@ -38,7 +38,6 @@ class CategoriDetailAdapter(private val listener: Listener) :
                 .error(R.drawable.eror)
                 .into(avatarImageView)
 
-            // Получаем detailId элемента и передаем его в метод onClickDetail интерфейса Listener
             val detailId = item.detail_id
             itemView.setOnClickListener { listener.onClickDetail(detailId) }
         }

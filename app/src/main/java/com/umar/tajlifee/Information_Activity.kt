@@ -52,7 +52,7 @@ class Information_Activity : AppCompatActivity() {
 
             val imagePathFromDatabase = information.images_url
 
-            val fullImagePath = "file:///android_asset/$imagePathFromDatabase.png"
+            val fullImagePath = "file:///android_asset/$imagePathFromDatabase"
 
             Glide.with(this@Information_Activity)
                 .load(fullImagePath)
