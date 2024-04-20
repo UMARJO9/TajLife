@@ -1,9 +1,11 @@
 package com.umar.tajlifee
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.umar.tajlifee.categori.dbCategori.DatabaseManager
 import com.umar.tajlifee.categori.dbCategori.entity.EntityInformation
@@ -19,6 +21,9 @@ class Information_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
+
+        window.statusBarColor = ContextCompat.getColor(this, R.color.background)
+
 
         imageView = findViewById(R.id.imageViewInfo)
         textView = findViewById(R.id.information)
