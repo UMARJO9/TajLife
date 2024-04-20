@@ -6,4 +6,16 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/category_text_color</item>
     </style>
+
+    <style name="Circular">
+        <item name="cornerRadius">50dp</item>
+    </style>
+
+    <style name="SpecificCornerCut">
+        <item name="cornerSizeTopRight">75dp</item>
+        <item name="cornerFamilyTopRight">cut</item>
+        <item name="cornerSizeBottomLeft">75dp</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
+    </style>
+
 </resources>
