@@ -8,20 +8,21 @@
     tools:context=".Information_Activity"
     android:orientation="vertical"
     android:background="@color/background">
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         app:cardCornerRadius="12dp">
+
         <ImageView
             android:id="@+id/imageViewInfo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/baneer"
-            android:scaleType="centerCrop">
+            android:scaleType="centerCrop"
+            android:src="@drawable/baneer">
 
         </ImageView>
+
     </androidx.cardview.widget.CardView>
 
     <ScrollView
@@ -41,7 +42,19 @@
                 android:textSize="20sp"
                 style="@style/CategoryTextView"
                 tools:text="Title" />
+
+                <Button
+                    android:id="@+id/backButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/cardview_light_background"
+                    android:text="Назад"
+                    android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
+
+
 
 </LinearLayout>

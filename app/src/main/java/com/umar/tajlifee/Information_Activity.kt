@@ -1,6 +1,7 @@
 package com.umar.tajlifee
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class Information_Activity : AppCompatActivity() {
+
     private lateinit var imageView: ImageView
     private lateinit var textView: TextView
 
@@ -20,12 +22,16 @@ class Information_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
 
+        val backButton = findViewById<Button>(R.id.backButton)
+        backButton.setOnClickListener {
+            finish()
+        }
+
         imageView = findViewById(R.id.imageViewInfo)
         textView = findViewById(R.id.information)
 
         val detailId = intent.getIntExtra("detailId", -1)
         loadCategoryDetails(detailId)
-
     }
 
     private fun loadCategoryDetails(detailId: Int) {
