@@ -22,10 +22,10 @@ class Information_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
 
-        val backButton = findViewById<Button>(R.id.backButton)
-        backButton.setOnClickListener {
-            finish()
-        }
+//        val backButton = findViewById<Button>(R.id.backButton)
+//        backButton.setOnClickListener {
+//            finish()
+//        }
 
         imageView = findViewById(R.id.imageViewInfo)
         textView = findViewById(R.id.information)
