@@ -45,7 +45,7 @@ class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetai
                             val categoryId = requireActivity().intent.getIntExtra("categoryId", 1)
                             categoryDao.getCategoriesByParentId(categoryId)
                         } else {
-                            categoryDao.searchCategories(searchText)
+                            categoryDao.searchCategoriess(searchText)
                         }
                     }
                     adapter.updateItems(filteredData)

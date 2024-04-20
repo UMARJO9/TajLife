@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">TajLife</string>
-    <string name="search_hint">Посик\n</string>
-    <string name="search_hinti">Поиск</string>
-    <string name="hint">Поиск</string>
+    <string name="search_hint">Ҷустуҷу\n</string>
+    <string name="search_hinti">Ҷустуҷу</string>
+    <string name="hint">Ҷустуҷу</string>
 </resources>

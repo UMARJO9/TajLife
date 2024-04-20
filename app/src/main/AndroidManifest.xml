@@ -19,9 +19,6 @@
             android:name=".Categori_Detal_Activity"
             android:exported="false" />
         <activity
-            android:name=".CategoryDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
