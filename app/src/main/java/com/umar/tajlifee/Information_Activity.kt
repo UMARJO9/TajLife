@@ -23,7 +23,7 @@ class Information_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
 
-        window.statusBarColor = ContextCompat.getColor(this, R.color.background)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar)
 
 
         imageView = findViewById(R.id.imageViewInfo)
