@@ -41,6 +41,16 @@
                 android:textSize="20sp"
                 style="@style/CategoryTextView"
                 tools:text="Title" />
+
+<!--                <Button-->
+<!--                    android:id="@+id/backButton"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@color/cardview_light_background"-->
+<!--                    android:text="Назад"-->
+<!--                    android:textColor="@color/white" />-->
         </LinearLayout>
     </ScrollView>
 

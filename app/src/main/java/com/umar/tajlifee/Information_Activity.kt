@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class Information_Activity : AppCompatActivity() {
+
     private lateinit var imageView: ImageView
     private lateinit var textView: TextView
 
@@ -30,7 +31,6 @@ class Information_Activity : AppCompatActivity() {
 
         val detailId = intent.getIntExtra("detailId", -1)
         loadCategoryDetails(detailId)
-
     }
 
     private fun loadCategoryDetails(detailId: Int) {
