@@ -15,7 +15,9 @@ data class EntityCategoriModel(
     @ColumnInfo(name = "detail_id")
     val detail_id: Int,
     @ColumnInfo(name = "image_url")
-    val image_url: String
+    val image_url: String,
+    @ColumnInfo(name = "rus")
+    val rus: String,
 )
 @Entity(tableName = "information")
 data class EntityInformation(
