@@ -6,6 +6,7 @@ import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -20,13 +21,17 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
-            findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner)
-            //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner_night)
-        }
+//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+//        setSupportActionBar(toolbar)
+//        supportActionBar?.title = "ToolBarFragment"
+
+//        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+//        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+//            findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner)
+//            //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner_night)
+//        }
 
     }
 }

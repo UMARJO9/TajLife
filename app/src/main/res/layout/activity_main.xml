@@ -10,24 +10,6 @@
     android:orientation="vertical">
 
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            app:cardCornerRadius="12dp">
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/baneer"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true">
-            </ImageView>
-
-
-        </androidx.cardview.widget.CardView>
-
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/chats_fragment_container"
         android:name="com.umar.tajlifee.categori.CategoryFragment"

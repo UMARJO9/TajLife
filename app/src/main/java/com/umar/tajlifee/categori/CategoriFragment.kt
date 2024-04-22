@@ -1,12 +1,23 @@
 package com.umar.tajlifee.categori
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.umar.tajlifee.Categori_Detal_Activity
@@ -18,19 +29,35 @@ import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
-class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener {
+class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener, MenuProvider {
     private lateinit var categoryDao: CategoriDao
     private val adapter = ChatsAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().addMenuProvider(this,viewLifecycleOwner, Lifecycle.State.CREATED)
+
+        val appCompatActivity = requireActivity() as AppCompatActivity
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        appCompatActivity.setSupportActionBar(toolbar)
+//        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            view.findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner)
+            //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            view.findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner_night)
+        }
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChat)
         recyclerView.adapter = adapter
 
-        val searchEditText = view.findViewById<EditText>(R.id.TextViewsearch)
-        searchEditText.setBackgroundResource(0)
+//        val searchEditText = view.findViewById<EditText>(R.id.TextViewsearch)
+//        searchEditText.setBackgroundResource(0)
 
         val db = DatabaseManager.getDatabase(requireContext())
         categoryDao = db.categoryDao()
@@ -39,25 +66,6 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
             addDataToDatabase()
         }
 
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val searchText = s.toString().toLowerCase()
-                lifecycleScope.launch {
-                    val filteredData = withContext(Dispatchers.IO) {
-                        if (searchText.isNullOrEmpty()) {
-                            categoryDao.getCategoriesWithIsStart(1)
-                        } else {
-                            categoryDao.searchCategories(searchText)
-                        }
-                    }
-                    adapter.updateItems(filteredData)
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
     }
 
     private suspend fun addDataToDatabase() {
@@ -73,6 +81,66 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
         val intent = Intent(context, Categori_Detal_Activity::class.java)
         intent.putExtra("categoryId", item.id)
         startActivity(intent)
+    }
+
+    override fun setHasOptionsMenu(hasMenu: Boolean) {
+        super.setHasOptionsMenu(hasMenu)
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.main_menu, menu)
+
+        val searchView: SearchView = menu.findItem(R.id.search)?.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                lifecycleScope.launch {
+                    val filteredData = withContext(Dispatchers.IO) {
+                        if (searchText.isNullOrEmpty()) {
+                            categoryDao.getCategoriesWithIsStart(1)
+                        } else {
+                            categoryDao.searchCategories(searchText)
+                        }
+                    }
+                    adapter.updateItems(filteredData)
+                }
+                return false
+            }
+        })
+    }
+
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return  when (menuItem.itemId) {
+
+//            android.R.id.home -> {
+//                requireActivity()
+//                true
+//            }
+
+            R.id.search -> {
+                true
+            }
+
+            R.id.tj -> {
+                Toast.makeText(requireContext(), "Tajik", Toast.LENGTH_SHORT).show()
+
+                true
+            }
+
+            R.id.ru -> {
+                Toast.makeText(requireContext(), "Russian", Toast.LENGTH_SHORT).show()
+
+                true
+            }
+
+            else -> false
+        }
     }
 
 }

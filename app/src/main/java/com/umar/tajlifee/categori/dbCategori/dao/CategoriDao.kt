@@ -13,7 +13,7 @@ interface CategoriDao {
 
     @Query("SELECT * FROM category WHERE title LIKE '%' || :searchText || '%' AND is_start = 1")
     suspend fun searchCategories(searchText: String): List<EntityCategoriModel>
-    @Query("SELECT * FROM category WHERE title LIKE '%' || :searchText || '%'")
+    @Query("SELECT * FROM category WHERE title LIKE '%' || :searchText || '%' ")
     suspend fun searchCategoriess(searchText: String): List<EntityCategoriModel>
 
     @Query("SELECT * FROM category WHERE is_start = :isStart")

@@ -2,10 +2,15 @@ package com.umar.tajlifee
 
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuProvider
 import com.bumptech.glide.Glide
 import com.umar.tajlifee.categori.dbCategori.DatabaseManager
 import com.umar.tajlifee.categori.dbCategori.entity.EntityInformation
@@ -14,7 +19,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class Information_Activity : AppCompatActivity() {
+class Information_Activity : AppCompatActivity(), MenuProvider {
 
     private lateinit var imageView: ImageView
     private lateinit var textView: TextView
@@ -23,6 +28,9 @@ class Information_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
 
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar)
 
 
@@ -64,6 +72,21 @@ class Information_Activity : AppCompatActivity() {
                 .placeholder(R.drawable.avatar)
                 .error(R.drawable.eror)
                 .into(imageView)
+        }
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+
+            else -> false
         }
     }
 }
