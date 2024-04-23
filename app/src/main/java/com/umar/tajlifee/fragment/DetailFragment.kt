@@ -1,14 +1,11 @@
-package com.umar.tajlifee.categoridetailadpter
+package com.umar.tajlifee.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
@@ -19,9 +16,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.umar.tajlifee.Information_Activity
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.dbCategori.DatabaseManager
-import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
-import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
+import com.umar.tajlifee.adapter.CategoriDetailAdapter
+import com.umar.tajlifee.categori.dbCategory.DatabaseManager
+import com.umar.tajlifee.categori.dbCategory.dao.CategoriDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,26 +47,6 @@ class DetailFragment : Fragment(R.layout.fragment_categori_detal), CategoriDetai
         val db = DatabaseManager.getDatabase(requireContext())
         categoryDao = db.categoryDao()
 
-//        searchEditText.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                val searchText = s.toString().toLowerCase()
-//                lifecycleScope.launch {
-//                    val filteredData = withContext(Dispatchers.IO) {
-//                        if (searchText.isNullOrEmpty()) {
-//                            val categoryId = requireActivity().intent.getIntExtra("categoryId", 1)
-//                            categoryDao.getCategoriesByParentId(categoryId)
-//                        } else {
-//                            categoryDao.searchCategoriess(searchText)
-//                        }
-//                    }
-//                    adapter.updateItems(filteredData)
-//                }
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {}
-//        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -1,15 +1,12 @@
-package com.umar.tajlifee.categori
+package com.umar.tajlifee.fragment
 
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,10 +19,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.umar.tajlifee.Categori_Detal_Activity
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.adapter.ChatsAdapter
-import com.umar.tajlifee.categori.dbCategori.DatabaseManager
-import com.umar.tajlifee.categori.dbCategori.dao.CategoriDao
-import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
+import com.umar.tajlifee.adapter.ChatsAdapter
+import com.umar.tajlifee.categori.dbCategory.DatabaseManager
+import com.umar.tajlifee.categori.dbCategory.dao.CategoriDao
+import com.umar.tajlifee.categori.dbCategory.entity.EntityCategoriModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

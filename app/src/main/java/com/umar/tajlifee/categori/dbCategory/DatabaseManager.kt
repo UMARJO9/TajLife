@@ -1,4 +1,4 @@
-package com.umar.tajlifee.categori.dbCategori
+package com.umar.tajlifee.categori.dbCategory
 
 import android.content.Context
 import androidx.room.Room

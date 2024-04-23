@@ -1,4 +1,4 @@
-package com.umar.tajlifee.categori.adapter
+package com.umar.tajlifee.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.umar.tajlifee.R
-import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
+import com.umar.tajlifee.categori.dbCategory.entity.EntityCategoriModel
 
 class ChatsAdapter(private val listener: Listener) :
     RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.umar.tajlifee.categori.dbCategori.entity
+package com.umar.tajlifee.categori.dbCategory.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
