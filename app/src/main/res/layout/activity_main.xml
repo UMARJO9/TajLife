@@ -12,7 +12,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/chats_fragment_container"
-        android:name="com.umar.tajlifee.categori.CategoryFragment"
+        android:name="com.umar.tajlifee.fragment.CategoryFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

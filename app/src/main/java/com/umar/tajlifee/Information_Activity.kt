@@ -1,6 +1,5 @@
 package com.umar.tajlifee
 
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,8 +11,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import com.bumptech.glide.Glide
-import com.umar.tajlifee.categori.dbCategori.DatabaseManager
-import com.umar.tajlifee.categori.dbCategori.entity.EntityInformation
+import com.umar.tajlifee.categori.dbCategory.DatabaseManager
+import com.umar.tajlifee.categori.dbCategory.entity.EntityInformation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

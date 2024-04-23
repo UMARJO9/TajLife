@@ -1,10 +1,10 @@
-package com.umar.tajlifee.categori.dbCategori.dao
+package com.umar.tajlifee.categori.dbCategory.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.umar.tajlifee.categori.dbCategori.entity.EntityCategoriModel
-import com.umar.tajlifee.categori.dbCategori.entity.EntityInformation
+import com.umar.tajlifee.categori.dbCategory.entity.EntityCategoriModel
+import com.umar.tajlifee.categori.dbCategory.entity.EntityInformation
 
 @Dao
 interface CategoriDao {
@@ -26,6 +26,7 @@ interface CategoriDao {
 
     @Query("DELETE FROM category")
     suspend fun deleteAllCategories()
+
 }
 @Dao
 interface InformationDao{
@@ -38,4 +39,3 @@ interface InformationDao{
 
 
 }
-
