@@ -40,21 +40,10 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
         val appCompatActivity = requireActivity() as AppCompatActivity
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         appCompatActivity.setSupportActionBar(toolbar)
-//        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
-            view.findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner)
-            //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            view.findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.banner_night)
-        }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChat)
         recyclerView.adapter = adapter
 
-//        val searchEditText = view.findViewById<EditText>(R.id.TextViewsearch)
-//        searchEditText.setBackgroundResource(0)
 
         val db = DatabaseManager.getDatabase(requireContext())
         categoryDao = db.categoryDao()
@@ -77,6 +66,7 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
     override fun onItemClick(item: EntityCategoriModel) {
         val intent = Intent(context, Categori_Detal_Activity::class.java)
         intent.putExtra("categoryId", item.id)
+        intent.putExtra("categoryName", item.title)
         startActivity(intent)
     }
 
@@ -115,15 +105,9 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return  when (menuItem.itemId) {
 
-//            android.R.id.home -> {
-//                requireActivity()
-//                true
-//            }
-
             R.id.search -> {
                 true
             }
-
             R.id.tj -> {
                 Toast.makeText(requireContext(), "Tajik", Toast.LENGTH_SHORT).show()
 

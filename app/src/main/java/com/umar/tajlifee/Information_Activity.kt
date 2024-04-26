@@ -27,15 +27,14 @@ class Information_Activity : AppCompatActivity(), MenuProvider {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
 
+        val categoryNames = intent.getStringExtra("categoryNames")
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = categoryNames
         window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar)
-
-
         imageView = findViewById(R.id.imageViewInfo)
         textView = findViewById(R.id.information)
-
         val detailId = intent.getIntExtra("detailId", -1)
         loadCategoryDetails(detailId)
     }
@@ -75,17 +74,21 @@ class Information_Activity : AppCompatActivity(), MenuProvider {
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-
+        TODO("Not yet implemented")
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return when (menuItem.itemId) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
                 true
             }
 
-            else -> false
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
