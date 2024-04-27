@@ -108,17 +108,6 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
             R.id.search -> {
                 true
             }
-            R.id.tj -> {
-                Toast.makeText(requireContext(), "Tajik", Toast.LENGTH_SHORT).show()
-
-                true
-            }
-
-            R.id.ru -> {
-                Toast.makeText(requireContext(), "Russian", Toast.LENGTH_SHORT).show()
-
-                true
-            }
 
             else -> false
         }
