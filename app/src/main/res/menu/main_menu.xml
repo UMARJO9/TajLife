@@ -9,6 +9,10 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
 
-
+    <item
+        android:id="@+id/dark_mode"
+        android:title="Dark Mode"
+        android:icon="@drawable/ic_sun"
+        app:showAsAction="always" />
 
 </menu>

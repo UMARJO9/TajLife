@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuProvider
@@ -40,6 +41,14 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
         val appCompatActivity = requireActivity() as AppCompatActivity
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         appCompatActivity.setSupportActionBar(toolbar)
+
+
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            view.findViewById<ImageView>(R.id.imageViewInfo).setImageResource(R.drawable.banner)
+        } else {
+            view.findViewById<ImageView>(R.id.imageViewInfo).setImageResource(R.drawable.banner_night)
+        }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewChat)
         recyclerView.adapter = adapter
@@ -103,9 +112,19 @@ class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.List
 
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return  when (menuItem.itemId) {
 
             R.id.search -> {
+                true
+            }
+
+            R.id.dark_mode -> {
+                if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
                 true
             }
 
