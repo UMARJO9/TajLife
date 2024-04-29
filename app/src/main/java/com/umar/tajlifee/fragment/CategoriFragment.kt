@@ -8,7 +8,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
@@ -20,7 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.umar.tajlifee.Categori_Detal_Activity
 import com.umar.tajlifee.R
-import com.umar.tajlifee.adapter.ChatsAdapter
+import com.umar.tajlifee.adapter.CategoryAdapter
 import com.umar.tajlifee.categori.dbCategory.DatabaseManager
 import com.umar.tajlifee.categori.dbCategory.dao.CategoriDao
 import com.umar.tajlifee.categori.dbCategory.entity.EntityCategoriModel
@@ -29,9 +28,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
 
-class CategoryFragment : Fragment(R.layout.fragment_categori), ChatsAdapter.Listener, MenuProvider {
+class CategoryFragment : Fragment(R.layout.fragment_categori), CategoryAdapter.Listener, MenuProvider {
     private lateinit var categoryDao: CategoriDao
-    private val adapter = ChatsAdapter(this)
+    private val adapter = CategoryAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

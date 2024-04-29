@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide
 import com.umar.tajlifee.R
 import com.umar.tajlifee.categori.dbCategory.entity.EntityCategoriModel
 
-class ChatsAdapter(private val listener: Listener) :
-    RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
+class CategoryAdapter(private val listener: Listener) :
+    RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     private val items = ArrayList<EntityCategoriModel>()
 

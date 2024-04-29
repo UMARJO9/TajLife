@@ -11,7 +11,7 @@ interface CategoriDao {
     @Insert
     suspend fun insertCategory(category: EntityCategoriModel)
 
-    @Query("SELECT * FROM category WHERE title LIKE '%' || :searchText || '%' AND is_start = 1")
+    @Query("SELECT * FROM category WHERE title LIKE '%' || :searchText || '%' ")
     suspend fun searchCategories(searchText: String): List<EntityCategoriModel>
 
     @Query("SELECT * FROM category WHERE title LIKE '%' || :searchText || '%' ")
